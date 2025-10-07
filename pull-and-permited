@@ -1,0 +1,16 @@
+#!/bin/bash
+cd /var/www/nama-proyek
+
+# Pull update
+git pull origin main
+
+# Set permission
+sudo chown -R www-data:www-data .
+sudo chmod -R 775 storage
+sudo chmod -R 775 bootstrap/cache
+
+# Refresh symlink
+php artisan storage:link
+
+# Cache optimizations (optional)
+php artisan optimize:clear
